@@ -2,8 +2,6 @@
 
 ## 使用技術
 
-- [Django](https://www.djangoproject.com/)
-
 
 ## セットアップ
 作成予定
