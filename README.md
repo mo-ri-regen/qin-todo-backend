@@ -4,8 +4,9 @@
 
 - Python(フレームワークは FastAPI)
 - postgresql
-- Heroku
+- Heroku(デプロイ先)
 - Docker（ローカルでのテスト時は Docker Compose）
+- gitmoji
 
 ## セットアップ
 
@@ -57,15 +58,15 @@ Conventional Commits に従う。
 
 ## その他
 
-[デザイン](https://www.figma.com/file/SNPCXNu0V6k6wHS4piYyS2/Qin-Todo?node-id=0%3A1)
-[フロントエンドリポジトリ](https://github.com/mo-ri-regen/qin-todo-frontend)
-[使用相談(プライベートリポジトリ)](https://github.com/qin-salon/qin-todo-backend/issues/1)
+- [デザイン](https://www.figma.com/file/SNPCXNu0V6k6wHS4piYyS2/Qin-Todo?node-id=0%3A1)
+- [フロントエンドリポジトリ](https://github.com/mo-ri-regen/qin-todo-frontend)
+- [使用相談(プライベートリポジトリ)](https://github.com/qin-salon/qin-todo-backend/issues/1)
 
 ### サンプルソース
 
-[fastapi サンプルソース](https://github.com/takasaki376/fast-task-docker)
-[Django で作成したサンプルソース](https://github.com/gotoh-poclab/docker-django-api)
+- [fastapi サンプルソース](https://github.com/takasaki376/fast-task-docker)
+- [Django で作成したサンプルソース](https://github.com/gotoh-poclab/docker-django-api)
 
 ### 参考
 
-[FastAPI 入門](https://zenn.dev/sh0nk/books/537bb028709ab9)
+- [FastAPI 入門](https://zenn.dev/sh0nk/books/537bb028709ab9)
