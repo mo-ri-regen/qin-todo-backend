@@ -2,17 +2,22 @@
 
 ## 使用技術
 
+- Python(フレームワークは FastAPI)
+- postgresql
+- Heroku
+- Docker（ローカルでのテスト時は Docker Compose）
 
 ## セットアップ
-作成予定
 
+作成予定
 
 ### Mocking
+
 作成予定
 
-## 開発する
+## 開発について
 
-## Git ブランチルール
+### Git ブランチルール
 
 `main`
 
@@ -48,4 +53,19 @@ Conventional Commits に従う。
 - docs: ドキュメントの生成や修正を行う場合
 - refactor: ロジックの変化は行わず、内部構造を整理のみを行う場合
 - test: テストの追加、及び修正を行う場合
-- ci: CIツールのファイルの変更を行う場合
+- ci: CI ツールのファイルの変更を行う場合
+
+## その他
+
+[デザイン](https://www.figma.com/file/SNPCXNu0V6k6wHS4piYyS2/Qin-Todo?node-id=0%3A1)
+[フロントエンドリポジトリ](https://github.com/mo-ri-regen/qin-todo-frontend)
+[使用相談(プライベートリポジトリ)](https://github.com/qin-salon/qin-todo-backend/issues/1)
+
+### サンプルソース
+
+[fastapi サンプルソース](https://github.com/takasaki376/fast-task-docker)
+[Django で作成したサンプルソース](https://github.com/gotoh-poclab/docker-django-api)
+
+### 参考
+
+[FastAPI 入門](https://zenn.dev/sh0nk/books/537bb028709ab9)
