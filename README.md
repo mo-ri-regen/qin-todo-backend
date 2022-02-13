@@ -10,7 +10,28 @@
 
 ## セットアップ
 
-作成予定
+### Docker イメージの作成
+
+docker-compose.yml があるディレクトリで下記コマンドを実行します。
+すると、Docker Image が作成されます。
+
+```bash
+docker-compose build
+```
+
+### FastAPI のインストール
+
+依存パッケージをインストールする
+
+```bash
+docker-compose run --entrypoint "poetry install" qin-todo
+```
+
+新しい Python パッケージを追加した場合は下記コマンドで再ビルドをする
+
+```bash
+docker-compose build --no-cache
+```
 
 ### Mocking
 
