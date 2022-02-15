@@ -5,7 +5,8 @@
 - Python(フレームワークは FastAPI)
 - postgresql
 - Heroku(デプロイ先)
-- Docker（ローカルでのテスト時は Docker Compose）
+- Docker ver 20.10.10
+  - ローカルでのテスト時は Docker Compose ver 1.29.2 を使用
 - gitmoji
 
 ## セットアップ
@@ -21,16 +22,88 @@ docker-compose build
 
 ### FastAPI のインストール
 
-依存パッケージをインストールする
+依存パッケージをインストールします
 
 ```bash
 docker-compose run --entrypoint "poetry install" qin-todo
 ```
 
-新しい Python パッケージを追加した場合は下記コマンドで再ビルドをする
+新しい Python パッケージを追加した場合は下記コマンドで再ビルドをします
 
 ```bash
 docker-compose build --no-cache
+```
+
+### 実行
+
+- 初回
+
+```bash
+docker-compose up
+```
+
+- 2 回目実行
+
+```bash
+docker-compose up --remove-orphans
+```
+
+するとサーバが立ち上がるので
+
+http://localhost:8000/docs にアクセスしてください
+
+サーバが立ち上がった状態で別ウィンドウでターミナルを起動してください
+
+#### Postgresql
+
+##### Docker コンテナにログイン
+
+```bash
+docker-compose exec postqresql /bin/bash
+```
+
+```bash
+# ログインに成功したとき下記のようになります
+root@dc7f998a87fd:/#
+```
+
+#### DB に接続
+
+root ユーザを指定して DB に接続します
+
+```bash
+psql -U root postgres
+```
+
+```bash
+# ログインに成功したら下記のようになります
+postgres=#
+```
+
+##### Postgresql コマンド
+
+- データベースに入る
+
+```bash
+psql <DB_NAME>
+```
+
+- ユーザーを指定してデータベースに入る
+
+```bash
+psql -U <USER_NAME> <DB_NAME>
+```
+
+- データベースから出る
+
+```bash
+# \q
+```
+
+### 終了
+
+```bash
+docker-compose down
 ```
 
 ### Mocking
@@ -91,3 +164,5 @@ Conventional Commits に従う。
 ### 参考
 
 - [FastAPI 入門](https://zenn.dev/sh0nk/books/537bb028709ab9)
+- [PostgreSQL の命名規則](https://dev.appswingby.com/sql/postgresql%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87/)
+- [PostgreSQL](よく使うコマンドまとめ)
