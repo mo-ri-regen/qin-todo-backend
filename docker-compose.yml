@@ -1,5 +1,15 @@
 version: "3"
 services:
+  postqresql:
+    image: postgres:14.2
+    container_name: postgresql
+    ports:
+      - "1234:1234"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: qin
+      POSTGRES_DB: postgres
+
   qin-todo:
     build: .
     volumes:
