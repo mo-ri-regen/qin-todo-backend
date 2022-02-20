@@ -54,12 +54,19 @@ http://localhost:8000/docs にアクセスしてください
 
 サーバが立ち上がった状態で別ウィンドウでターミナルを起動してください
 
+##### 【補足説明】DBのマイグレーション
+```bash
+docker-compose exec qin-todo poetry run python -m api.migrate_db
+```
+
 ##### 【補足説明】追加でライブラリーの追加
 
-以下の例は、alembicとsqlalchemyを追加
+以下の例は、alembicとsqlalchemyとpsycopg2を追加
 ```bash
-docker-compose exec qin-todo poetry add alembic sqlalchemy
+docker-compose exec qin-todo poetry add alembic sqlalchemy psycopg2
 ```
+
+
 
 #### Postgresql
 
