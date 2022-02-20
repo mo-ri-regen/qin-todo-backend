@@ -54,6 +54,13 @@ http://localhost:8000/docs にアクセスしてください
 
 サーバが立ち上がった状態で別ウィンドウでターミナルを起動してください
 
+##### 【補足説明】追加でライブラリーの追加
+
+以下の例は、alembicとsqlalchemyを追加
+```bash
+docker-compose exec qin-todo poetry add alembic sqlalchemy
+```
+
 #### Postgresql
 
 ##### Docker コンテナにログイン
