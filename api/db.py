@@ -1,16 +1,12 @@
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, declarative_base
+import sqlalchemy
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-ASYNC_DB_URL = "postgresql://root:qin@postgres/db"
+#Postgresを利用 'postgresql://ユーザー名:パスワード@ホスト/DB名'
+#ローカルで動かすときのユーザー名、パスワード、ホスト名、DB名は、docker-composeファイルを参照のこと
+DB_URL = "postgresql://root:qin@postqresql:5432/postgres"
 
-async_engine = create_async_engine(ASYNC_DB_URL, echo=True)
-async_session = sessionmaker(
-    autocommit=False, autoflush=False, bind=async_engine, class_=AsyncSession
-)
+engine = sqlalchemy.create_engine(DB_URL, echo=True)
 
 Base = declarative_base()
 
-
-async def get_db():
-    async with async_session() as session:
-        yield session
+SessionLocal = sessionmaker(bind=engine)
