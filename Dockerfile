@@ -5,7 +5,8 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /src
 
 # pipを使ってpoetryをインストール
-RUN pip3 install poetry
+RUN pip3 install poetry && \
+pip3 install python-dotenv
 
 # poetryの定義ファイルをコピー (存在する場合)
 COPY pyproject.toml* poetry.lock* ./
