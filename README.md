@@ -34,6 +34,20 @@ docker-compose run --entrypoint "poetry install" qin-todo
 docker-compose build --no-cache
 ```
 
+### パッケージのインストール
+
+psycopg2 と alembic をそれぞれインストールする
+
+```bash
+docker-compose run --entrypoint "poetry add psycopg2 alembic python-dotenv" qin-todo
+```
+
+### マイグレーション
+
+```bash
+docker-compose exec qin-todo poetry run python -m api.migrate_db
+```
+
 ### 実行
 
 - 初回
@@ -91,7 +105,8 @@ psql <DB_NAME>
 - ユーザーを指定してデータベースに入る
 
 ```bash
-psql -U <USER_NAME> <DB_NAME>
+# psql -U <USER_NAME> <DB_NAME>
+psql -U root postgres
 ```
 
 - データベースから出る
