@@ -11,6 +11,7 @@ uvicorn = {extras = ["standard"], version = "^0.17.4"}
 SQLAlchemy = "^1.4.31"
 alembic = "^1.7.6"
 psycopg2 = "^2.9.3"
+asyncpg = "^0.25.0"
 
 [tool.poetry.dev-dependencies]
 

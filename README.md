@@ -61,9 +61,9 @@ docker-compose exec qin-todo poetry run python -m api.migrate_db
 
 ##### 【補足説明】追加でライブラリーの追加
 
-以下の例は、alembicとsqlalchemyとpsycopg2を追加
+以下の例は、alembicとsqlalchemyとasyncpgを追加
 ```bash
-docker-compose exec qin-todo poetry add alembic sqlalchemy psycopg2
+docker-compose exec qin-todo poetry add alembic sqlalchemy asyncpg
 ```
 
 
