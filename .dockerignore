@@ -1,6 +1,6 @@
-/env
+.env
 .git
-.gitginore
+.gitignore
 .vscode
 
 # Documents
