@@ -2,6 +2,7 @@ version: "3"
 services:
   postqresql:
     image: postgres:14.2
+    platform: linux/x86_64 # M1 Macの場合必要
     container_name: postgresql
     ports:
       - "1234:1234"
