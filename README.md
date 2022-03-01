@@ -36,11 +36,13 @@ docker-compose build --no-cache
 
 ### パッケージのインストール
 
-psycopg2 と alembic をそれぞれインストールする
+alembic をインストールする
 
 ```bash
-docker-compose run --entrypoint "poetry add psycopg2 alembic python-dotenv" qin-todo
+docker-compose run --entrypoint "poetry add alembic python-dotenv" qin-todo
 ```
+
+pip コマンドによるパッケージのインストールは requirements.txt に記載する
 
 ### マイグレーション
 
@@ -95,12 +97,6 @@ postgres=#
 ```
 
 ##### Postgresql コマンド
-
-- データベースに入る
-
-```bash
-psql <DB_NAME>
-```
 
 - ユーザーを指定してデータベースに入る
 
