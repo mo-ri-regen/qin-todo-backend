@@ -2,7 +2,6 @@
 FROM python:3.9-buster
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /src
 
 # pipを使ってrequiremnts.txtをインストール
 ADD requirements.txt .
