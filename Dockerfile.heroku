@@ -10,7 +10,7 @@ ADD requirements.txt .
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 
-COPY api/main.py .
+COPY ./app /app
 
 # uvicornのサーバーを立ち上げる
-ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
+ENTRYPOINT ["run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
