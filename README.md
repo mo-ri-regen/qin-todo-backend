@@ -39,7 +39,7 @@ docker-compose build --no-cache
 alembic をインストールする
 
 ```bash
-docker-compose run --entrypoint "poetry add alembic python-dotenv" qin-todo
+docker-compose run --entrypoint "poetry add asyncpg alembic python-dotenv" qin-todo
 ```
 
 pip コマンドによるパッケージのインストールは requirements.txt に記載する
