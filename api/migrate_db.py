@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine
-from api.db import Base
+from api.models.task import Base
 
 #Postgresを利用 'postgresql://ユーザー名:パスワード@ホスト/DB名'
 #ローカルで動かすときのユーザー名、パスワード、ホスト名、DB名は、docker-composeファイルを参照のこと
-DB_URL = "postgresql+asyncpg://root:qin@postqresql:5432/postgres"
+
+DB_URL = "postgresql+psycopg2://root:qin@postqresql:5432/postgres"
 engine = create_engine(DB_URL, echo=True)
 
 

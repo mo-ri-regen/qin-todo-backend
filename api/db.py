@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, declarative_base
 
 
-DB_URL = '{}://{}:{}@{}:{}/{}'.format("postgresql+asyncpg", "admin", "password", "db", "5432", "async_db")
+DB_URL = "postgresql+asyncpg://root:qin@postqresql:5432/postgres"
 engine = create_async_engine(DB_URL, echo=True)
 Session = scoped_session(
             sessionmaker(
