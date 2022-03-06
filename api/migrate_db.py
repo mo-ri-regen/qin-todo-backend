@@ -1,7 +1,5 @@
 from sqlalchemy import create_engine
-
 from api.db import Base
-from api.models.task import Task, Done
 
 #Postgresを利用 'postgresql://ユーザー名:パスワード@ホスト/DB名'
 #ローカルで動かすときのユーザー名、パスワード、ホスト名、DB名は、docker-composeファイルを参照のこと

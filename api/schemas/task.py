@@ -20,7 +20,6 @@ class TaskCreateResponse(TaskCreate):
 
 class Task(TaskBase):
     id: int
-    done: bool = Field(False, description="完了フラグ")
 
     class Config:
         orm_mode = True
