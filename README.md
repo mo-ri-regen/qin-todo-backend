@@ -34,6 +34,22 @@ docker-compose run --entrypoint "poetry install" qin-todo
 docker-compose build --no-cache
 ```
 
+### パッケージのインストール
+
+alembic をインストールする
+
+```bash
+docker-compose run --entrypoint "poetry add asyncpg alembic python-dotenv" qin-todo
+```
+
+pip コマンドによるパッケージのインストールは requirements.txt に記載する
+
+### マイグレーション
+
+```bash
+docker-compose exec qin-todo poetry run python -m api.migrate_db
+```
+
 ### 実行
 
 - 初回
@@ -82,16 +98,11 @@ postgres=#
 
 ##### Postgresql コマンド
 
-- データベースに入る
-
-```bash
-psql <DB_NAME>
-```
-
 - ユーザーを指定してデータベースに入る
 
 ```bash
-psql -U <USER_NAME> <DB_NAME>
+# psql -U <USER_NAME> <DB_NAME>
+psql -U root postgres
 ```
 
 - データベースから出る

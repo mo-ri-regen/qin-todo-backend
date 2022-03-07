@@ -11,8 +11,10 @@ RUN pip3 install poetry
 COPY pyproject.toml* poetry.lock* ./
 
 # poetryでライブラリをインストール (pyproject.tomlが既にある場合)
-RUN poetry config virtualenvs.in-project true
-RUN if [ -f pyproject.toml ]; then poetry install; fi
+
+RUN poetry config virtualenvs.in-project true && \
+if [ -f pyproject.toml ]; then poetry install; fi
+
 
 # uvicornのサーバーを立ち上げる
 ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
