@@ -2,15 +2,14 @@
 FROM python:3.9-buster
 ENV PYTHONUNBUFFERED=1
 
-
-
 # pipを使ってrequiremnts.txtをインストール
 ADD requirements.txt .
-
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
+EXPOSE 80
 
-
+COPY ./api /api
 
 # uvicornのサーバーを立ち上げる
-ENTRYPOINT ["run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload", "--port", "80"]
