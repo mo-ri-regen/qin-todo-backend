@@ -6,10 +6,8 @@ ENV PYTHONUNBUFFERED=1
 ADD requirements.txt .
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-EXPOSE 80
-
 COPY ./api /api
 
 # uvicornのサーバーを立ち上げる
 
-CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker api.main:app
+CMD ["uvicorn", "api.main:app"]
