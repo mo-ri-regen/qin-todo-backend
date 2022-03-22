@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+# from fastapi import APIRouter
 
+import api.schemas.task as task_schema
 
 router = APIRouter()
 
@@ -7,9 +8,7 @@ router = APIRouter()
 async def get_task():
     pass
 
-@router.post("/todo")
-async def add_task():
-    pass
+@router.post("/tasks", response_model=task_schema.TaskCreateResponse)
 
 @router.put("/todo/{id}")
 async def edit_task():
