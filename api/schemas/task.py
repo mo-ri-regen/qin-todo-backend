@@ -4,7 +4,11 @@ from pydantic import BaseModel, Field
 import datetime
 
 class TaskBase(BaseModel):
-    title: Optional[str] = Field(None, example="クリーニングを取りに行く")
+    task: Optional[str] = Field(None, example="クリーニング")
+    sort_key:int =Field(0, example=0)
+    due_date:str =Field(None, example="2022-04-01")
+    complete_date:str = Field(None, example="2022-04-28")
+    is_done:bool =Field(False, example=False)
     
 class TaskCreate(TaskBase):
     pass
