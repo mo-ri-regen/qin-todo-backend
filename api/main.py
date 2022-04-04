@@ -8,9 +8,10 @@ from api.router import tasks
 app = FastAPI()
 
 load_dotenv()
+ASYNC_DB_URL = (os.environ['DATABASE_URL']).replace('postgresql', 'postgresql+asyncpg')
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.environ['ORIGINS'],
+    allow_origins=ASYNC_DB_URL,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

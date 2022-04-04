@@ -8,10 +8,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# async_engine = create_async_engine(os.environ['DATABASE_URL'], echo=True)
 # async_session = sessionmaker(
 #     autocommit=False, autoflush=False, bind=connect_db.async_engine, class_=AsyncSession
 # )
+ASYNC_DB_URL = (os.environ['DATABASE_URL']).replace('postgresql', 'postgresql+asyncpg')
+async_engine = create_async_engine(ASYNC_DB_URL, echo=True)
 Base = declarative_base()
 
 async def connect_db():
