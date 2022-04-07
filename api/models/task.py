@@ -4,10 +4,13 @@ from api.db import Base
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
+def generate_uuid():
+    return str(uuid.uuid4())
+
 class Task(Base):
     __tablename__ = "tasks"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    uuid = Column(String, name="uuid", primary_key=True, default=generate_uuid)
     sort_key = Column(Integer)
     task = Column(String(1024))
 
