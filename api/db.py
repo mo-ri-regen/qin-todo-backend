@@ -24,7 +24,7 @@ async def connect_db():
     return await asyncpg.connect(ASYNC_DB_URL)
 async def disconnect_db(conn):
     return await conn.close()
-# async def get_db():
-#     async with async_session() as session:
-#         yield session
+async def get_db():
+    async with async_session() as session:
+        yield session
         
