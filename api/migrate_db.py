@@ -15,7 +15,7 @@ async def definition_db():
     ''')
     await conn.execute('''
         CREATE TABLE tasks(
-            id               serial,
+            id               uuid,
             task             text,
             user_id          UUID NOT NULL,
             sort_key         int NOT NULL default 0,
