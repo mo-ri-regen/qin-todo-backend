@@ -2,12 +2,13 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 import datetime
+from datetime import date
 
 class TaskBase(BaseModel):
     task: Optional[str] = Field(None, example="クリーニング")
     sort_key:int =Field(0, example=0)
-    due_date:str =Field(None, example="2022-04-01")
-    complete_date:str = Field(None, example="2022-04-28")
+    due_date:date =Field(None, example="2022-04-01")
+    complete_date:date = Field(None, example="2022-04-28")
     is_done:bool =Field(False, example=False)
     
 class TaskCreate(TaskBase):
