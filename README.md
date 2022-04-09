@@ -42,6 +42,12 @@ alembic をインストールする
 docker-compose run --entrypoint "poetry add asyncpg alembic python-dotenv" qin-todo
 ```
 
+SQLAlchemy-Utils をインストールする
+
+```bash
+docker-compose run --entrypoint "poetry add SQLAlchemy-Utils" qin-todo
+```
+
 pip コマンドによるパッケージのインストールは requirements.txt に記載する
 
 ### マイグレーション
@@ -103,6 +109,12 @@ postgres=#
 ```bash
 # psql -U <USER_NAME> <DB_NAME>
 psql -U root postgres
+```
+
+- uuid の拡張機能インストール
+
+```bash
+CREATE EXTENSION pgcrypto;
 ```
 
 - データベースから出る
