@@ -1,6 +1,7 @@
 from typing import Optional
 
 from pydantic import BaseModel, Field
+# import uuid
 import datetime
 from datetime import date
 
@@ -21,9 +22,15 @@ class TaskCreateResponse(TaskCreate):
         orm_mode = True
             
 class Task(TaskBase):
-    id: int
-    title: Optional[str] = Field(None, example="クリーニングを取りに行く")
-    done: bool = Field(False, description="完了フラグ")
+    id:int
+    sort_key=Field(0, example=0)
+    task: Optional[str] = Field(None, example="クリーニングを取りに行く",description="タスク内容")
+    
+    # user_id:uuid.uuid4 = Field(uuid.uuid4, example=uuid.uuid4, description="FirebaseのユーザID")
+    
+    is_done: bool = Field(False, description="完了フラグ")
+    create_at:date = Field(None, example="2022-04-28")
+    update_at:date = Field(None, example="2022-04-28")
 
     class Config:
         orm_mode = True
