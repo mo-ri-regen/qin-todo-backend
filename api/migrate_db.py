@@ -11,7 +11,7 @@ async def definition_db():
 
     # TODO: テーブルを消すのではなくaltertableで定義する
     await conn.execute('''
-        DROP TABLE if exists tasks
+        DROP TABLE if exists tasks;
     ''')
     await conn.execute('''
         CREATE TABLE tasks(
