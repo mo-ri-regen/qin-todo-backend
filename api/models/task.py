@@ -16,3 +16,6 @@ class Task(Base):
     due_date = Column(DateTime)
     complete_date = Column(DateTime)
     is_done = Column(Boolean)
+
+    create_at = Column(DateTime)
+    update_at = Column(DateTime)
