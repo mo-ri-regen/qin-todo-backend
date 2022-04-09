@@ -4,9 +4,6 @@ from api.db import Base
 import uuid
 from sqlalchemy_utils import UUIDType
 
-# def generate_uuid():
-#     return str(uuid.uuid4())
-
 class Task(Base):
     __tablename__ = "tasks"
 
