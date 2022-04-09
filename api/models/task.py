@@ -12,6 +12,7 @@ class Task(Base):
 
     id = Column(UUIDType(binary=False), primary_key=True, default=uuid.uuid4)
     sort_key = Column(Integer)
+    # TODO: firebaseに登録されているユーザIDを登録する
     user_id = Column(UUIDType(binary=False), default=uuid.uuid4)
     task = Column(String(1024))
 
