@@ -1,10 +1,10 @@
 # from fastapi import APIRouter
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 import api.schemas.task as task_schema
 import api.cruds.task as task_crud
-
 from api.db import get_db
 
 router = APIRouter()
@@ -12,6 +12,10 @@ router = APIRouter()
 @router.get("/todo/{id}")
 async def get_task():
     pass
+
+@router.get("/tasks", response_model=List[task_schema.Task])
+async def list_tasks(db: AsyncSession = Depends(get_db)):
+    return await task_crud.get_tasks_with_done(db)
 
 @router.post("/tasks", response_model=task_schema.TaskCreateResponse)
 async def create_task(

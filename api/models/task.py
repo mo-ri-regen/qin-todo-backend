@@ -4,9 +4,6 @@ from api.db import Base
 import uuid
 from sqlalchemy_utils import UUIDType
 
-# def generate_uuid():
-#     return str(uuid.uuid4())
-
 class Task(Base):
     __tablename__ = "tasks"
 
@@ -19,3 +16,6 @@ class Task(Base):
     due_date = Column(DateTime)
     complete_date = Column(DateTime)
     is_done = Column(Boolean)
+
+    create_at = Column(DateTime)
+    update_at = Column(DateTime)

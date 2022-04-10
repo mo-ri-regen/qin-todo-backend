@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ASYNC_DB_URL = os.environ['DATABASE_URL']
 # ASYNC_DB_URL = (os.environ['DATABASE_URL']).replace('postgresql', 'postgresql+asyncpg')
 ASYNC_DB_URL = os.environ['DATABASE_URL']
 ASYNC_DB_URL = ASYNC_DB_URL.replace('postgresql', 'postgresql+asyncpg')
@@ -17,9 +16,8 @@ async_session = scoped_session(
         sessionmaker(
             autocommit=False
             ,autoflush=False
-            ,
-            bind=async_engine,
-            class_=AsyncSession
+            ,bind=async_engine
+            ,class_=AsyncSession
 ))
 Base = declarative_base()
 
