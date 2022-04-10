@@ -1,0 +1,11 @@
+# python3.9のイメージをダウンロード
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
+ENV PYTHONUNBUFFERED=1
+
+# pipを使ってrequiremnts.txtをインストール
+ADD requirements.txt .
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+COPY ./api /api
+
+
