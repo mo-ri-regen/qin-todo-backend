@@ -4,6 +4,8 @@ from api.db import Base
 import uuid
 from sqlalchemy_utils import UUIDType
 
+from datetime import datetime
+
 class Task(Base):
     __tablename__ = "tasks"
 
@@ -17,5 +19,6 @@ class Task(Base):
     complete_date = Column(DateTime)
     is_done = Column(Boolean)
 
-    create_at = Column(DateTime)
-    update_at = Column(DateTime)
+    create_at = Column(DateTime, default=datetime.now)
+    update_at = Column(DateTime, default=datetime.now)
+    
