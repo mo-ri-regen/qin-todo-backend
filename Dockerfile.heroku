@@ -1,0 +1,9 @@
+# python3.9のイメージをダウンロード
+FROM python:3.9-buster
+ENV PYTHONUNBUFFERED=1
+
+# pipを使ってrequiremnts.txtをインストール
+ADD requirements.txt .
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+COPY ./api /api
