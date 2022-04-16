@@ -1,6 +1,8 @@
 # from fastapi import APIRouter
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
+from pydantic import BaseModel
+from datetime import datetime
 from typing import List
 from uuid import UUID
 import api.schemas.task as task_schema
@@ -9,20 +11,33 @@ from api.db import get_db
 
 router = APIRouter()
 
-@router.get("/todo/{id}")
+class TaskOut(BaseModel):
+    id: str
+    task: str
+    userId: str
+    sortKey: int
+    dueDate: datetime
+    completeDate: datetime
+    isDone: bool
+    createAt: datetime
+    updateAt: datetime
+
+    
+@router.get("/todo/{id}", response_model=TaskOut)
 async def get_task():
     pass
 
-@router.get("/tasks", response_model=List[task_schema.Task])
+@router.get("/tasks", response_model=List[TaskOut])
 async def list_tasks(db: AsyncSession = Depends(get_db)):
     return await task_crud.get_tasks_with_done(db)
 
-@router.post("/tasks", response_model=task_schema.TaskCreateResponse)
+@router.post("/tasks", response_model=TaskOut)
 async def create_task(
     task_body: task_schema.TaskCreate, db: AsyncSession = Depends(get_db)
 ):
     return await task_crud.create_task(db, task_body)
-@router.put("/todo/{id}")
+
+@router.put("/todo/{id}", response_model=TaskOut)
 async def edit_task(
    task_id: UUID, task_body: task_schema.TaskCreate, db: AsyncSession = Depends(get_db)
 ):
@@ -35,3 +50,8 @@ async def edit_task(
 @router.delete("/todo/{id}")
 async def delete_task():
     pass
+
+
+
+
+

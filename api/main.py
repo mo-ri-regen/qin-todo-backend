@@ -12,7 +12,7 @@ ASYNC_DB_URL = (os.environ['DATABASE_URL']).replace('postgresql', 'postgresql+as
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ASYNC_DB_URL,
+    allow_origins=os.environ['ORIGINS'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

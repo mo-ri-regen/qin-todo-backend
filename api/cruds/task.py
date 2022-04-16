@@ -1,5 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 import api.models.task as task_model
 import api.schemas.task as task_schema
 
@@ -10,17 +11,32 @@ from uuid import UUID
 
 from datetime import datetime
 
+def task_serializer(task:task_model.Task) -> dict:
+    return {
+        "id": task["id"],
+        "task": task["task"],
+        "userId": task["user_id"],
+        "sortKey": task["sort_key"],
+        "dueDate": task["due_date"],
+        "completeDate": task["complete_date"],
+        "isDone": task["is_done"],
+        "createAt": task["create_at"],
+        "updateAt": task["update_at"]
+    }
+
 async def create_task(
     db: AsyncSession, task_create: task_schema.TaskCreate
-) -> task_model.Task:
+) -> dict:
     task = task_model.Task(**task_create.dict())
     db.add(task)
     await db.commit()
     await db.refresh(task)
-    return task
+    task = task_serializer(task)
+    json_compatible_task = jsonable_encoder(task)
+    return JSONResponse(status_code=201, content=json_compatible_task)
 
-async def get_tasks_with_done(db: AsyncSession) -> List[Tuple[int, str, bool]]:
-    result: Result = await (
+async def get_tasks_with_done(db: AsyncSession) -> List:
+    result: task_model.Task = await (
         db.execute(
             select(
                 task_model.Task.id
@@ -35,10 +51,15 @@ async def get_tasks_with_done(db: AsyncSession) -> List[Tuple[int, str, bool]]:
             )
         )
     )
-    return result.all()
+    tasks = []
+    for task in result.all():
+        tasks.append(task_serializer(task))
+    json_compatible_tasks = jsonable_encoder(tasks)
+    return JSONResponse(status_code=200, content=json_compatible_tasks)
 
-async def get_task(db: AsyncSession, task_id: UUID) -> Optional[task_model.Task]:
-    result: Result = await db.execute(
+
+async def get_task(db: AsyncSession, task_id: UUID) -> dict:
+    result: task_model.Task = await db.execute(
         select(task_model.Task).filter(task_model.Task.id == task_id)
     )
     task: Optional[Tuple[task_model.Task]] = result.first()
@@ -46,7 +67,7 @@ async def get_task(db: AsyncSession, task_id: UUID) -> Optional[task_model.Task]
 
 async def update_task(
     db: AsyncSession, task_create: task_schema.TaskCreate, original: task_model.Task
-) -> task_model.Task:
+) -> dict:
     original.task = task_create.task
     original.sort_key = task_create.sort_key
     original.due_date = task_create.due_date
@@ -57,4 +78,6 @@ async def update_task(
     db.add(original)
     await db.commit()
     await db.refresh(original)
-    return original
+    task = task_serializer(task=original)
+    json_compatible_task = jsonable_encoder(task)
+    return JSONResponse(status_code=200, content=json_compatible_task)
