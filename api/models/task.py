@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy.types import Date
 from api.db import Base
 
 import uuid
@@ -15,8 +16,8 @@ class Task(Base):
     user_id = Column(UUIDType(binary=False), default=uuid.uuid4)
     task = Column(String(1024))
 
-    due_date = Column(DateTime)
-    complete_date = Column(DateTime)
+    due_date = Column(Date)
+    complete_date = Column(Date)
     is_done = Column(Boolean)
 
     create_at = Column(DateTime, default=datetime.now)
