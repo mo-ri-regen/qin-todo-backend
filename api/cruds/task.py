@@ -11,7 +11,7 @@ from uuid import UUID
 
 from datetime import datetime
 
-def task_serializer(task:task_model.Task) -> dict:
+def task_res_serializer(task:task_model.Task) -> dict:
     return {
         "id": task["id"],
         "task": task["task"],
@@ -23,6 +23,18 @@ def task_serializer(task:task_model.Task) -> dict:
         "createAt": task["create_at"],
         "updateAt": task["update_at"]
     }
+def task_cls_res_serializer(task:task_model.Task) -> dict:
+    return {
+        "id": str(task.id),
+        "task": task.task,
+        "userId": str(task.user_id),
+        "sortKey": task.sort_key,
+        "dueDate": task.due_date,
+        "completeDate": task.complete_date,
+        "isDone": task.is_done,
+        "createAt": task.create_at,
+        "updateAt": task.update_at
+    }
 
 async def create_task(
     db: AsyncSession, task_create: task_schema.TaskCreate
@@ -31,9 +43,8 @@ async def create_task(
     db.add(task)
     await db.commit()
     await db.refresh(task)
-    task = task_serializer(task)
-    json_compatible_task = jsonable_encoder(task)
-    return JSONResponse(status_code=201, content=json_compatible_task)
+    task = task_cls_res_serializer(task)
+    return task
 
 async def get_tasks_with_done(db: AsyncSession) -> List:
     result: task_model.Task = await (
@@ -53,7 +64,7 @@ async def get_tasks_with_done(db: AsyncSession) -> List:
     )
     tasks = []
     for task in result.all():
-        tasks.append(task_serializer(task))
+        tasks.append(task_res_serializer(task))
     json_compatible_tasks = jsonable_encoder(tasks)
     return JSONResponse(status_code=200, content=json_compatible_tasks)
 
@@ -78,6 +89,6 @@ async def update_task(
     db.add(original)
     await db.commit()
     await db.refresh(original)
-    task = task_serializer(task=original)
+    task = task_cls_res_serializer(task=original)
     json_compatible_task = jsonable_encoder(task)
     return JSONResponse(status_code=200, content=json_compatible_task)
