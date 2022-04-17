@@ -39,7 +39,7 @@ def task_cls_req_serializer(task:TaskIn) -> task_schema.TaskCreate:
     retuen_task.is_done = task.isDone
     return retuen_task
     
-@router.get("/todo/{id}", response_model=TaskOut)
+@router.get("/tasks/{id}", response_model=TaskOut)
 async def get_task():
     pass
 
@@ -54,18 +54,18 @@ async def create_task(
     task:task_schema.TaskCreate = task_cls_req_serializer(task_body)
     return await task_crud.create_task(db, task)
 
-@router.put("/todo/{id}")
+@router.put("/tasks/{id}")
 async def edit_task(
-    task_id: UUID, task_body: TaskIn, db: AsyncSession = Depends(get_db)
+    id: UUID, task_body: TaskIn, db: AsyncSession = Depends(get_db)
 ):
     task_in: task_schema.TaskCreate = task_cls_req_serializer(task_body)
-    task = await task_crud.get_task(db, task_id=task_id)
+    task = await task_crud.get_task(db, task_id=id)
     if task is None:
         raise HTTPException(status_code=404, detail="Task not found")
 
     return await task_crud.update_task(db, task_in, original=task)
 
-@router.delete("/todo/{id}")
+@router.delete("/tasks/{id}")
 async def delete_task():
     pass
 
