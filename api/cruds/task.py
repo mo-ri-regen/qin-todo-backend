@@ -69,8 +69,8 @@ async def get_tasks_with_done(db: AsyncSession) -> List:
     return JSONResponse(status_code=200, content=json_compatible_tasks)
 
 
-async def get_task(db: AsyncSession, task_id: UUID) -> dict:
-    result: task_model.Task = await db.execute(
+async def get_task(db: AsyncSession, task_id: UUID) -> Optional[task_model.Task]:
+    result: Result = await db.execute(
         select(task_model.Task).filter(task_model.Task.id == task_id)
     )
     task: Optional[Tuple[task_model.Task]] = result.first()
@@ -90,5 +90,4 @@ async def update_task(
     await db.commit()
     await db.refresh(original)
     task = task_cls_res_serializer(task=original)
-    json_compatible_task = jsonable_encoder(task)
-    return JSONResponse(status_code=200, content=json_compatible_task)
+    return task

@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel, Field
 from datetime import datetime, date
-from typing import List, Optional
+from typing import List
 from uuid import UUID
 import api.schemas.task as task_schema
 import api.cruds.task as task_crud
@@ -54,15 +54,16 @@ async def create_task(
     task:task_schema.TaskCreate = task_cls_req_serializer(task_body)
     return await task_crud.create_task(db, task)
 
-@router.put("/todo/{id}", response_model=TaskOut)
+@router.put("/todo/{id}")
 async def edit_task(
-   task_id: UUID, task_body: task_schema.TaskCreate, db: AsyncSession = Depends(get_db)
+    task_id: UUID, task_body: TaskIn, db: AsyncSession = Depends(get_db)
 ):
+    task_in: task_schema.TaskCreate = task_cls_req_serializer(task_body)
     task = await task_crud.get_task(db, task_id=task_id)
     if task is None:
         raise HTTPException(status_code=404, detail="Task not found")
 
-    return await task_crud.update_task(db, task_body, original=task)    
+    return await task_crud.update_task(db, task_in, original=task)
 
 @router.delete("/todo/{id}")
 async def delete_task():
