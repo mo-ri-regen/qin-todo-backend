@@ -91,3 +91,8 @@ async def update_task(
     await db.refresh(original)
     task = task_cls_res_serializer(task=original)
     return task
+
+async def delete_task(db: AsyncSession, original: task_model.Task) -> None:
+    await db.delete(original)
+    await db.commit()
+    
