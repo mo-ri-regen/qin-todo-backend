@@ -9,6 +9,7 @@ import api.schemas.task as task_schema
 import api.cruds.task as task_crud
 import api.models.task as task_model
 from api.db import get_db
+from api.user import get_user
 
 router = APIRouter()
 
@@ -39,8 +40,8 @@ def task_cls_req_serializer(task:TaskIn) -> task_schema.TaskCreate:
     retuen_task.is_done = task.isDone
     return retuen_task
     
-@router.get("/tasks/{id}", response_model=TaskOut)
-async def get_task():
+@router.get("/todo/{id}", response_model=TaskOut)
+async def get_task(user=Depends(get_user)):
     pass
 
 @router.get("/tasks", response_model=List[TaskOut])
