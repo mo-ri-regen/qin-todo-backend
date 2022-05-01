@@ -48,6 +48,12 @@ SQLAlchemy-Utils をインストールする
 docker-compose run --entrypoint "poetry add SQLAlchemy-Utils" qin-todo
 ```
 
+fire_baseadmin のインストール
+
+```bash
+docker-compose run --entrypoint "poetry add firebase-admin" qin-todo
+```
+
 pip コマンドによるパッケージのインストールは requirements.txt に記載する
 
 ### マイグレーション
