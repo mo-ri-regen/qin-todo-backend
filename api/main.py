@@ -14,7 +14,7 @@ if ASYNC_DB_URL and ASYNC_DB_URL.startswith("postgres://"):
     ASYNC_DB_URL = ASYNC_DB_URL.replace("postgres://", "postgresql://", 1)
 ASYNC_DB_URL = ASYNC_DB_URL.replace('postgresql', 'postgresql+asyncpg')
 
-if not os.environ['DATABASE_URL'] == "postgres://":
+if not os.environ['DEVELOPMENT_KEY'] == "heroku":
     app.add_middleware(
         CORSMiddleware,
         allow_origins=os.environ['ORIGINS'],
