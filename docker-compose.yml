@@ -1,0 +1,20 @@
+version: "3"
+services:
+  postqresql:
+    image: postgres:14.2
+    platform: linux/x86_64 # M1 Macの場合必要
+    container_name: postgresql
+    ports:
+      - "1234:1234"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: qin
+      POSTGRES_DB: postgres
+
+  qin-todo:
+    build: .
+    volumes:
+      - .dockervenv:/src/.venv
+      - .:/src
+    ports:
+      - 8000:8000 # ホストマシンのポート8000を、docker内のポート8000に接続する
