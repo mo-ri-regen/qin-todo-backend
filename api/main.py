@@ -20,7 +20,3 @@ app.add_middleware(
 )
 
 app.include_router(tasks.router)
-
-@app.get("/hello")
-async def hello():
-    return {"message": "hello world!"}
