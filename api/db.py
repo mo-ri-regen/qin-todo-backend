@@ -8,7 +8,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ASYNC_DB_URL = (os.environ['DATABASE_URL']).replace('postgresql', 'postgresql+asyncpg')
+ASYNC_DB_URL = os.environ['DATABASE_URL']
+if ASYNC_DB_URL and ASYNC_DB_URL.startswith("postgres://"):
+    ASYNC_DB_URL = ASYNC_DB_URL.replace("postgres://", "postgresql://", 1)
+ASYNC_DB_URL = ASYNC_DB_URL.replace('postgresql', 'postgresql+asyncpg')
 
 async_engine = create_async_engine(ASYNC_DB_URL, echo=True)
 async_session = scoped_session(
