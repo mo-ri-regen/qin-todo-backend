@@ -10,10 +10,13 @@ app = FastAPI()
 load_dotenv()
 
 ASYNC_DB_URL = os.environ['DATABASE_URL']
-if ASYNC_DB_URL and ASYNC_DB_URL.startswith("postgres://"):
+
+# herokuにデフォルトでは入っていないので、SettingsのConfig VarsにDEVELOPMENT KEYというものを追加しました。
+if os.environ['DEVELOPMENT_KEY'] == "heroku"::
     ASYNC_DB_URL = ASYNC_DB_URL.replace("postgres://", "postgresql://", 1)
 ASYNC_DB_URL = ASYNC_DB_URL.replace('postgresql', 'postgresql+asyncpg')
 
+# SettingsのConfig VarsのORIGINSという項目を追加して、フロント側のURLを加える。
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.environ['ORIGINS'],
