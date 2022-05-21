@@ -12,7 +12,7 @@ load_dotenv()
 ASYNC_DB_URL = os.environ['DATABASE_URL']
 
 # herokuにデフォルトでは入っていないので、SettingsのConfig VarsにDEVELOPMENT KEYというものを追加しました。
-if os.environ['DEVELOPMENT_KEY'] == "heroku"::
+if os.environ['DEVELOPMENT_KEY'] == "heroku":
     ASYNC_DB_URL = ASYNC_DB_URL.replace("postgres://", "postgresql://", 1)
 ASYNC_DB_URL = ASYNC_DB_URL.replace('postgresql', 'postgresql+asyncpg')
 
