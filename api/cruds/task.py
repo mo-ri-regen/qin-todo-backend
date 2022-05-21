@@ -59,7 +59,7 @@ async def get_tasks_with_done(db: AsyncSession) -> List:
                 ,task_model.Task.is_done
                 ,task_model.Task.create_at
                 ,task_model.Task.update_at
-            )
+            ).filter(task_model.Task.is_done == False)
         )
     )
     tasks = []
