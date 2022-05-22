@@ -5,7 +5,7 @@ import api.models.task as task_model
 import api.schemas.task as task_schema
 
 from typing import List, Tuple, Optional
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from sqlalchemy.engine import Result
 from uuid import UUID
 
@@ -59,15 +59,13 @@ async def get_tasks_with_done(db: AsyncSession) -> List:
                 ,task_model.Task.is_done
                 ,task_model.Task.create_at
                 ,task_model.Task.update_at
-            )
+            ).filter(or_(task_model.Task.complete_date == date.today(),
+                    task_model.Task.is_done == False))
         )
     )
     tasks = []
     for task in result.all():
-        if task.complete_date == date.today():
-            tasks.append(task_res_serializer(task))
-        elif task.is_done == False:
-            tasks.append(task_res_serializer(task))
+        tasks.append(task_res_serializer(task))
     json_compatible_tasks = jsonable_encoder(tasks)
     return JSONResponse(status_code=200, content=json_compatible_tasks)
 
