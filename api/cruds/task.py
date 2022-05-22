@@ -59,12 +59,15 @@ async def get_tasks_with_done(db: AsyncSession) -> List:
                 ,task_model.Task.is_done
                 ,task_model.Task.create_at
                 ,task_model.Task.update_at
-            ).filter(task_model.Task.is_done == False)
+            )
         )
     )
     tasks = []
     for task in result.all():
-        tasks.append(task_res_serializer(task))
+        if task.complete_date == date.today():
+            tasks.append(task_res_serializer(task))
+        elif task.is_done == False:
+            tasks.append(task_res_serializer(task))
     json_compatible_tasks = jsonable_encoder(tasks)
     return JSONResponse(status_code=200, content=json_compatible_tasks)
 
