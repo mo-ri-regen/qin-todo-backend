@@ -9,7 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.engine import Result
 from uuid import UUID
 
-from datetime import datetime
+from datetime import datetime, date
 
 def task_res_serializer(task:task_model.Task) -> dict:
     return {
