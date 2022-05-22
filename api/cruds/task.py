@@ -5,11 +5,11 @@ import api.models.task as task_model
 import api.schemas.task as task_schema
 
 from typing import List, Tuple, Optional
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from sqlalchemy.engine import Result
 from uuid import UUID
 
-from datetime import datetime
+from datetime import datetime, date
 
 def task_res_serializer(task:task_model.Task) -> dict:
     return {
@@ -59,7 +59,8 @@ async def get_tasks_with_done(db: AsyncSession) -> List:
                 ,task_model.Task.is_done
                 ,task_model.Task.create_at
                 ,task_model.Task.update_at
-            )
+            ).filter(or_(task_model.Task.complete_date == date.today(),
+                    task_model.Task.is_done == False))
         )
     )
     tasks = []

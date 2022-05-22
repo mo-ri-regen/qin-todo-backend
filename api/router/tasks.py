@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime, date
 from typing import List
 from uuid import UUID
+from datetime import datetime, date
 import api.schemas.task as task_schema
 import api.cruds.task as task_crud
 import api.models.task as task_model
@@ -15,8 +16,8 @@ router = APIRouter()
 class TaskIn(BaseModel):
     task: str = Field(None, example="クリーニング")
     sortKey: int = Field(0, example=0)
-    dueDate: date = Field(None, example="2022-04-01")
-    completeDate: date = Field(None, example="2022-04-28")
+    dueDate: date = Field(None, example=date.today())
+    completeDate: date = Field(None, example=date.today())
     isDone: bool = Field(False, example=False)
     
 class TaskOut(BaseModel):
